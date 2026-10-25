@@ -44,10 +44,10 @@ Nushell 配置需要新开标签/窗口；Starship 在下一行提示符生效�
 设计如此：启动时占活动屏幕 50%，居中。想改全屏/尺寸，修改
 `config/wezterm/events/window-position.lua` 与 `config/appearance.lua` 的 `initial_cols/rows`。
 
-### Q8：背景图为什么是渐变，不是截图里的插画？
+### Q8：背景图可以换成自己的吗？
 
-仓库不包含个人壁纸（版权/体积原因），`backdrops/flower-meadow.jpg` 是生成的占位渐变图。
-把自己的壁纸覆盖为同名文件即可；详见 [定制](customization.md#2-背景图透明度与亮度)。
+可以。仓库内 `backdrops/flower-meadow.jpg` 是本机使用的背景图（版权归原作者）；
+直接用同名文件替换成你的壁纸即可；详见 [定制](customization.md#2-背景图透明度与亮度)。
 
 ### Q9：右键粘贴不生效/和别的软件冲突？
 
@@ -165,3 +165,4 @@ Get-Command wezterm
 ```powershell
 pwsh -File .\scripts\verify.ps1
 ```
+

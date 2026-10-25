@@ -28,7 +28,7 @@ wezterm-nushell-starship/
 │  │  │  └─ new-tab-button.lua      "+"按钮行为
 │  │  ├─ colors/custom.lua          界面元素配色覆盖
 │  │  ├─ utils/{platform,math}.lua  工具函数
-│  │  ├─ backdrops/flower-meadow.jpg 生成的占位背景图
+│  │  ├─ backdrops/flower-meadow.jpg 本机背景图
 │  │  ├─ README.md                  模块说明（原项目文档）
 │  │  ├─ THIRD-PARTY-NOTICES.md     WezTerm 配置的第三方声明
 │  │  └─ .editorconfig/.gitattributes/.gitignore/.luarc.json/.stylua.toml/selene.toml
@@ -144,3 +144,4 @@ wezterm-nushell-starship/
 | `%APPDATA%\nushell\vendor\autoload\starship.nu` | 每次启动 Nushell 重新生成  |
 | `*.bak-<时间戳>`                                | 安装脚本备份               |
 | `config/nushell/history.txt`                    | Nushell 历史（.gitignore） |
+

@@ -89,7 +89,7 @@ pwsh -File .\scripts\verify.ps1
 │  │  ├─ events/                tab-title / right-status / new-tab-button / window-position
 │  │  ├─ colors/custom.lua      Tokyo Night Moon 界面覆盖色
 │  │  ├─ utils/                 platform / math
-│  │  └─ backdrops/             背景图（仓库内为生成占位图）
+│  │  └─ backdrops/             背景图（仓库内含本机壁纸）
 │  ├─ nushell/
 │  │  ├─ config.nu              7 节单文件配置
 │  │  ├─ env.nu                 默认 env 模板
@@ -135,8 +135,8 @@ Windows 11 一级右键菜单（可选安装）：
 
 ![Windows 11 一级右键菜单](docs/images/context-menu.png)
 
-> 说明：仓库内的 `flower-meadow.jpg` 是**生成的渐变占位图**；截图使用的是本机个人壁纸，
-> 该图片未随仓库分发。想获得截图效果，把同名文件替换成你自己的壁纸即可。
+> 说明：仓库包含本机使用的背景图 `flower-meadow.jpg`，截图与仓库效果一致。
+> 该图片仅随本配置分享，版权归原作者；如涉及版权问题请替换或删除（保持同名即可）。
 
 ## 文档
 
@@ -198,3 +198,5 @@ A complete, tested Windows 11 terminal setup built on WezTerm (modular Lua confi
 Starship (Tokyo Night powerline prompt). It includes one-command installation, a health-check script,
 12 shell completions, AI-CLI tab-title wrapper, and an optional Windows 11 top-level Explorer context
 menu entry ("Open WezTerm here"). Full documentation is in Chinese under [`docs/`](docs/).
+
+

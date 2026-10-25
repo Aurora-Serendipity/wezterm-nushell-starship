@@ -37,7 +37,7 @@ utils/
   platform.lua               平台判断（Windows/macOS/Linux）
   math.lua                   数值 clamp/round
 backdrops/
-  flower-meadow.jpg          窗口背景图（仓库内为生成的占位图，可替换）
+  flower-meadow.jpg          窗口背景图（仓库内含本机壁纸，可替换）
 .editorconfig / .gitignore / .luarc.json / .stylua.toml / selene.toml
 THIRD-PARTY-NOTICES.md       参考项目的 MIT 许可与改编说明
 ```
@@ -90,7 +90,7 @@ THIRD-PARTY-NOTICES.md       参考项目的 MIT 许可与改编说明
 
 - 配色：内置 `Tokyo Night Moon`，`colors/custom.lua` 只覆盖标签栏/滚动条/选区等界面元素。
 - 背景：`backdrops/flower-meadow.jpg` + 窗口透明度 0.7；背景图层居中裁剪，`hsb.brightness = 0.9` 可单独调暗（改 `config/appearance.lua`）。
-  仓库内该 JPG 是生成的渐变占位图，可直接用同名文件替换成自己的壁纸。
+  仓库内含本机使用的背景图，可直接用同名文件替换成自己的壁纸。
 - 窗口：一体化细标题栏（`INTEGRATED_BUTTONS|RESIZE`），Windows 风格按钮。
 - 标签栏：retro 模式（非 fancy），带序号与进程名的 Powerline 标签，`tab_max_width = 25`。
 - 右侧状态栏：日期时间 + 电池（无电池设备自动只显示时间）。
@@ -144,3 +144,5 @@ Windows 11 的新右键菜单只接受带包身份的 `IExplorerCommand` 扩展�
 [wezterm-kit](https://github.com/dqtx760/wezterm-kit)（Copyright (c) 2026 DQTX）。
 Windows 右键菜单使用 [Custom Context Menu](https://github.com/ikas-mc/ContextMenuForWindows11)（LGPL-3.0，
 仅安装使用其发布包，未复制代码）。详见 [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md)。
+
+

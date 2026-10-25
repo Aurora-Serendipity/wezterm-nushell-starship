@@ -51,7 +51,7 @@
 
 ### 1.6 背景图
 
-- 仓库内 `backdrops/flower-meadow.jpg` 是**生成的 Tokyo Night 渐变占位图**（约 31 KB）；
+- 仓库内 `backdrops/flower-meadow.jpg` 是本机使用的背景图（约 113 KB）；
 - 用自己的壁纸覆盖同名文件即可获得本机截图效果；
 - 背景亮暗由 `appearance.lua` 的 `hsb.brightness` 控制（默认 0.9）；
 - 窗口整体透明度由 `window_background_opacity` 控制（默认 0.7）。
@@ -155,4 +155,5 @@
 - [文件参考](file-reference.md)
 - [定制指南](customization.md)
 - [排错手册](troubleshooting.md)
+
 
