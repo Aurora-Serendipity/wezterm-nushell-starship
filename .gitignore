@@ -1,0 +1,23 @@
+# 备份与生成文件
+*.bak-*
+*.bak
+*.tmp
+*.log
+
+# 生成文件
+config/nushell/vendor/
+config/nushell/history.txt
+config/nushell/history.sqlite3
+config/nushell/config.nu.bak*
+
+# 系统文件
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# 编辑器
+.vscode/
+.idea/
+
+# 本地覆盖
+*.local.*
