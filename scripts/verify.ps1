@@ -132,6 +132,12 @@ if ($nu -and (Test-Path -LiteralPath $NuConfig)) {
 
     $extras = (Get-Output $nu @('--config', $NuConfig, '-c', 'print ((scope commands | where name in ["git" "uv" "npm" "pnpm" "cargo" "rustup" "docker" "mvn" "winget" "ssh" "code" "rg"] | length) | into string)')).Trim()
     Check '补全命令已注册（>= 11 个）' ([int]$extras -ge 11) "实际：$extras"
+
+    $artCount = (Get-Output $nu @('--config', $NuConfig, '-c', 'print ((scope commands | where name in ["img" "art" "banner"] | length) | into string)')).Trim()
+    Check 'img/art/banner 终端艺术命令已定义' ($artCount -eq '3') "实际：$artCount / 3"
+    $chafa = Get-Command chafa -ErrorAction SilentlyContinue
+    $fastfetch = Get-Command fastfetch -ErrorAction SilentlyContinue
+    Info '终端艺术可选工具' "chafa=$(if ($chafa) { 'OK' } else { 'MISS' })；fastfetch=$(if ($fastfetch) { 'OK' } else { 'MISS' })"
 }
 
 # ---------- Starship ----------

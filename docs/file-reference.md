@@ -33,7 +33,7 @@ wezterm-nushell-starship/
 │  │  ├─ THIRD-PARTY-NOTICES.md     WezTerm 配置的第三方声明
 │  │  └─ .editorconfig/.gitattributes/.gitignore/.luarc.json/.stylua.toml/selene.toml
 │  ├─ nushell/
-│  │  ├─ config.nu                  7 节 Nushell 配置
+│  │  ├─ config.nu                  8 节 Nushell 配置
 │  │  ├─ env.nu                     默认 env 模板
 │  │  └─ custom-completions/        12 组补全 + README
 │  └─ starship.toml                 Powerline 提示符配置
@@ -56,6 +56,7 @@ wezterm-nushell-starship/
    ├─ troubleshooting.md            排错
    ├─ design.md                     设计取舍
    ├─ changelog.md                  变更记录
+   ├─ terminal-art.md               终端艺术工具与玩法
    ├─ file-reference.md             本文件
    └─ images/{wezterm-window,context-menu}.png
 ```
@@ -95,6 +96,7 @@ wezterm-nushell-starship/
 | 补全              | 12 条 use/source                                  | 第 4 节 |
 | vim               | `alias vim = nvim`                                | 第 5 节 |
 | cc                | `def --wrapped cc`                                | 第 5 节 |
+| 终端艺术          | `img` / `art` / `banner`                          | 第 8 节 |
 
 ## 4. Starship 模块
 
@@ -144,4 +146,5 @@ wezterm-nushell-starship/
 | `%APPDATA%\nushell\vendor\autoload\starship.nu` | 每次启动 Nushell 重新生成  |
 | `*.bak-<时间戳>`                                | 安装脚本备份               |
 | `config/nushell/history.txt`                    | Nushell 历史（.gitignore） |
+
 

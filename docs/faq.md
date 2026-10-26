@@ -158,6 +158,12 @@ Get-Command wezterm
 - 路径、WSL、字体安装脚本按 Windows 编写；
 - macOS/Linux 需要自行调整路径与启动项。
 
+### Q27：`img` / `art` / `banner` 不工作？
+
+- 确认 `chafa`、`fastfetch`、`wezterm` 都在 PATH；
+- `banner` 会覆盖 Nushell 内置同名命令，删除 `config.nu` 第 8 节即可恢复；
+- 安装命令与说明见 [终端艺术玩法](terminal-art.md)。
+
 ## 还没有解决？
 
 看 [排错手册](troubleshooting.md)，或运行：
@@ -165,4 +171,5 @@ Get-Command wezterm
 ```powershell
 pwsh -File .\scripts\verify.ps1
 ```
+
 

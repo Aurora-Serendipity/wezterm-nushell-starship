@@ -58,7 +58,7 @@
 
 ## 2. Nushell 配置
 
-文件：`config/nushell/config.nu`（7 节）
+文件：`config/nushell/config.nu`（8 节）
 
 | 节         | 内容                                                                                           | 说明                                     |
 | ---------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------- |
@@ -69,6 +69,7 @@
 | 5 别名     | `alias vim = nvim`；`def --wrapped cc`                                                         | AI CLI 包装                              |
 | 6 代理     | 仅注释说明未采纳                                                                               | 不自动设置代理                           |
 | 7 工具别名 | 仅注释说明未采纳                                                                               | 不绑定个人路径                           |
+| 8 终端艺术 | `def img` / `def art` / `def --wrapped banner`                                                 | 依赖 chafa / fastfetch / wezterm imgcat  |
 
 ### 2.1 `env.nu`
 
@@ -155,5 +156,4 @@
 - [文件参考](file-reference.md)
 - [定制指南](customization.md)
 - [排错手册](troubleshooting.md)
-
 

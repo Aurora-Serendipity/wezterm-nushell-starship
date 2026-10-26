@@ -127,6 +127,23 @@
 - 右键菜单脚本自动探测 `wezterm-gui.exe`；
 - 文档标注 WSL 发行版、路径、壁纸需要按本机调整。
 
+## 阶段 7：终端艺术（2026-10-26）
+
+**新增**：
+
+- `config.nu` 第 8 节：`img` / `art` / `banner` 三个 Nushell 命令；
+- Windows 原生：chafa、ascii-image-converter、Fastfetch、ImageMagick、pyfiglet、Pillow、OpenCV（64 位 Python）、sl；
+- Ubuntu-24.04 WSL：jp2a、figlet、toilet、cmatrix、cbonsai、asciiquarium、nyancat、img2txt、timg、pfetch、pipes.sh、hyfetch；
+- 文档：`docs/terminal-art.md`（安装、分工、试玩与注意事项）。
+
+**实测**：
+
+- `banner` 显示 Fastfetch 信息；
+- `art` 输出 chafa 字符画；
+- `img` 在 WezTerm 内走 `wezterm imgcat`，非 WezTerm 环境回退到 chafa。
+
+**未采纳**：Neofetch / screenfetch / hollywood、ffmpeg + chafa 视频、PabloDraw / Moebius / ASCII Art Studio。
+
 ## 版本矩阵（发布时）
 
 | 组件        | 版本                             |
@@ -155,6 +172,7 @@
 - 背景图版权归原作者，仅随本配置分享；
 - WSL 发行版名称是示例；
 - Windows 10 不支持新右键菜单机制。
+
 
 
 

@@ -182,9 +182,19 @@ Ctrl+Shift+1    # 新标签里开 WSL
 - 在资源管理器里选中文件夹按 `Shift+F10` 也能弹出右键菜单（键盘操作）；
 - 提示符图标显示为方块时，优先检查 Nerd Font 是否安装。
 
-## 12. 相关文档
+## 12. 终端艺术快捷命令（可选）
+
+- `img '<图片>'`：WezTerm 内用 `wezterm imgcat` 高清显示原图，其它终端回退到 chafa；
+- `art '<图片>'`：chafa 彩色字符/方块画；
+- `banner`：Fastfetch 系统信息。
+
+安装命令与完整玩法见 [终端艺术玩法](terminal-art.md)。
+
+## 13. 相关文档
 
 - [组件与配置详解](components.md)
 - [定制指南](customization.md)
 - [常见问题](faq.md)
 - [排错手册](troubleshooting.md)
+- [终端艺术玩法](terminal-art.md)
+

@@ -90,3 +90,30 @@ def --wrapped cc [...args: string] {
 # ------------------------------------------------------------
 # 参考方案中的 CTF 工具别名基于作者个人路径，未采纳。
 # ============================================================
+
+# ============================================================
+# 8. 终端艺术小工具（可选）
+# ------------------------------------------------------------
+# 依赖（Windows 原生）：chafa、fastfetch、wezterm（内置 imgcat）。
+# 安装命令与完整玩法见仓库 docs/terminal-art.md。
+# 注意：banner 会覆盖 Nushell 内置的同名命令；不想要时删除本节即可。
+# ============================================================
+
+# img：WezTerm 内用内置图像协议显示原图；其它终端回退到 chafa 字符画
+def img [path: string] {
+    if ((($env.WEZTERM_PANE? | default "") | is-empty) == false) {
+        ^wezterm imgcat $path
+    } else {
+        ^chafa --size 80x40 $path
+    }
+}
+
+# art：彩色字符/方块画
+def art [path: string] {
+    ^chafa --size 80x40 --symbols block --colors 256 $path
+}
+
+# banner：系统信息（Fastfetch），可透传 fastfetch 参数
+def --wrapped banner [...args: string] {
+    ^fastfetch ...$args
+}

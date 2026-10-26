@@ -189,6 +189,11 @@ cc --resume      # 继续会话
 - `config/wezterm/config/bindings.lua` 的 `Ctrl+Shift+1/2/3`；
 - `config/wezterm/config/domains.lua` 的 `wsl_domains`。
 
+### 5.5 终端艺术工具（可选）
+
+详见 [终端艺术玩法](terminal-art.md)。Windows 原生工具（chafa / Fastfetch / pyfiglet / sl 等）与
+Ubuntu-24.04 WSL 工具（jp2a / figlet / toilet / cmatrix / cbonsai 等）的安装命令、分工和试玩示例都在该文档中。
+
 ## 6. 升级
 
 ```powershell
@@ -263,3 +268,4 @@ pwsh -File .\scripts\context-menu\uninstall.ps1
 - [使用手册](usage.md)
 - [常见问题](faq.md)
 - [排错手册](troubleshooting.md)
+
