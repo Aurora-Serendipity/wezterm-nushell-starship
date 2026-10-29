@@ -144,6 +144,23 @@
 
 **未采纳**：Neofetch / screenfetch / hollywood、ffmpeg + chafa 视频、PabloDraw / Moebius / ASCII Art Studio。
 
+## 阶段 8：字体连字、Nushell 视觉与扩展工具（2026-10-29）
+
+**新增**：
+
+- WezTerm `fonts.lua` 开启 `harfbuzz_features = { "calt=1", "liga=1", "clig=1" }`，启用 CaskaydiaCove 编程连字；
+- Nushell 第 9 节：表格表头分隔线、空值符号、`PYTHONIOENCODING=utf-8`；
+- Windows 新工具：onefetch、btop（btop4win）、VHS、agg、glow、terminaltexteffects（tte）、ttyd（VHS 依赖）；
+- Ubuntu-24.04 新工具：cowsay、lolcat、fortune、tty-clock、boxes、asciinema；
+- 文档：`docs/terminal-art.md` 增补工具、字体/表格配置、VHS/agg 录制与试玩命令。
+
+**实测**：
+
+- 字体连字在 WezTerm 中生效；`explore` TUI 可启动；
+- `tte` 在 `PYTHONIOENCODING=utf-8` 下正常输出；
+- VHS 在补齐 ttyd 后成功录制 GIF；onefetch、btop、glow、agg 可用；
+- WSL 新工具均可运行。
+
 ## 版本矩阵（发布时）
 
 | 组件        | 版本                             |
@@ -161,7 +178,7 @@
 - WezTerm 配置加载无 ERROR/WARN；`show-keys` 基线行全部保留；
 - Nushell 配置可加载；`native-clip`、right prompt、`cc`、12 组合集补全；
 - Starship 左右提示符正常；c/cpp 模块在对应目录出现；
-- 健康检查 31 项全部通过（含可选右键菜单检查）；
+- 健康检查 32 项全部通过（含可选右键菜单检查）；
 - Windows 11 右键菜单一级项实测可用；
 - 安装脚本离线模式重装实测通过。
 
@@ -172,8 +189,4 @@
 - 背景图版权归原作者，仅随本配置分享；
 - WSL 发行版名称是示例；
 - Windows 10 不支持新右键菜单机制。
-
-
-
-
 

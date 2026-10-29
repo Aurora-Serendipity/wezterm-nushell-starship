@@ -17,7 +17,7 @@ wezterm-nushell-starship/
 │  │  │  ├─ init.lua                累加器 + 重复项告警 + config_builder
 │  │  │  ├─ general.lua             行为/回滚/粘贴/超链接
 │  │  │  ├─ appearance.lua          配色/背景/窗口/标签栏/光标
-│  │  │  ├─ fonts.lua               字体与字号
+│  │  │  ├─ fonts.lua               字体/字号/连字
 │  │  │  ├─ launch.lua              默认 shell + 启动菜单
 │  │  │  ├─ bindings.lua            leader/键位/key tables/鼠标
 │  │  │  └─ domains.lua             WSL/SSH/Unix 域
@@ -33,7 +33,7 @@ wezterm-nushell-starship/
 │  │  ├─ THIRD-PARTY-NOTICES.md     WezTerm 配置的第三方声明
 │  │  └─ .editorconfig/.gitattributes/.gitignore/.luarc.json/.stylua.toml/selene.toml
 │  ├─ nushell/
-│  │  ├─ config.nu                  8 节 Nushell 配置
+│  │  ├─ config.nu                  9 节 Nushell 配置
 │  │  ├─ env.nu                     默认 env 模板
 │  │  └─ custom-completions/        12 组补全 + README
 │  └─ starship.toml                 Powerline 提示符配置
@@ -75,6 +75,7 @@ wezterm-nushell-starship/
 | `default_cursor_style`          | `BlinkingBlock`              | 同上                    |
 | `font`                          | `CaskaydiaCove Nerd Font`    | `config/fonts.lua`      |
 | `font_size`                     | `13`                         | 同上                    |
+| `harfbuzz_features`             | `calt=1`、`liga=1`、`clig=1` | 同上                    |
 | `default_prog`                  | Nushell                      | `config/launch.lua`     |
 | `leader`                        | `Ctrl+A`                     | `config/bindings.lua`   |
 | `mouse_bindings`                | 4 条                         | 同上                    |
@@ -97,6 +98,8 @@ wezterm-nushell-starship/
 | vim               | `alias vim = nvim`                                | 第 5 节 |
 | cc                | `def --wrapped cc`                                | 第 5 节 |
 | 终端艺术          | `img` / `art` / `banner`                          | 第 8 节 |
+| 表格视觉          | `header_on_separator=true`、`missing_value_symbol=·` | 第 9 节 |
+| Python 编码       | `PYTHONIOENCODING=utf-8`                          | 第 9 节 |
 
 ## 4. Starship 模块
 
@@ -146,5 +149,6 @@ wezterm-nushell-starship/
 | `%APPDATA%\nushell\vendor\autoload\starship.nu` | 每次启动 Nushell 重新生成  |
 | `*.bak-<时间戳>`                                | 安装脚本备份               |
 | `config/nushell/history.txt`                    | Nushell 历史（.gitignore） |
+
 
 

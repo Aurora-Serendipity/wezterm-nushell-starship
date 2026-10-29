@@ -2,7 +2,7 @@
 
 > 返回：[README](../README.md) · 相关：[使用手册](usage.md) · [定制指南](customization.md)
 
-本文记录本仓库配套的终端艺术工具（chafa / Fastfetch / figlet / cmatrix / timg 等）的安装命令、
+本文记录本仓库配套的终端艺术工具（chafa / Fastfetch / figlet / cmatrix / timg，以及 onefetch / btop / VHS / tte 等）的安装命令、
 在 Windows 与 WSL 中的分工，以及 `config.nu` 里的 `img` / `art` / `banner` 三个快捷命令。
 
 灵感与工具清单来自：[《终端 ASCII 艺术 · 完整手册》](https://mp.weixin.qq.com/s/A4uJLqTB5VNw_FxqcfZ4hw)。
@@ -16,6 +16,8 @@
 | `img <图片>` | WezTerm 内用内置图像协议显示原图；其他终端回退到 chafa 字符画 | `wezterm`、`chafa` |
 | `art <图片>` | 用 chafa 生成彩色字符/方块画                                  | `chafa`            |
 | `banner`     | 系统信息（Fastfetch），支持透传 fastfetch 参数                | `fastfetch`        |
+
+> 字体连字、Nushell 表格视觉见第 10 节。
 
 示例（注意 Windows 路径用**单引号**，避免 Nushell 把 `\U` 当转义）：
 
@@ -58,11 +60,19 @@ WezTerm 支持 iTerm2 图像协议（`wezterm imgcat` 已内置可用）；较�
 | OpenCV                | 用 `py -3.13` 导入      | 5.0.0        |
 | sl                    | `sl`（已加入 PATH）     | 6.1.5        |
 | WezTerm imgcat        | `wezterm imgcat`        | 随 WezTerm   |
+| onefetch              | `onefetch`              | 3.1.0        |
+| btop（btop4win）      | `btop`                  | 1.0.5        |
+| VHS                   | `vhs`                   | 0.12.1       |
+| ttyd（VHS 依赖）      | `ttyd`                  | 1.7.7        |
+| agg                   | `agg`                   | 1.9.0        |
+| glow                  | `glow`                  | 3.0.0        |
+| terminaltexteffects   | `tte`                   | 0.15.0       |
 
 ### 3.2 Ubuntu-24.04（WSL）
 
 `jp2a`、`figlet`、`toilet`、`showfigfonts`、`cmatrix`、`cbonsai`、`asciiquarium`、`nyancat`、
-`img2txt`（caca-utils）、`libaa-bin`、`timg`、`pfetch`、`pipes.sh`、`hyfetch`。
+`img2txt`（caca-utils）、`libaa-bin`、`timg`、`pfetch`、`pipes.sh`、`hyfetch`；
+扩展：`cowsay`、`lolcat`、`fortune`、`tty-clock`、`boxes`、`asciinema`。
 
 ## 4. 复现安装命令
 
@@ -74,8 +84,16 @@ winget install --id TheZoraiz.ascii-image-converter --silent
 winget install --id Fastfetch-cli.Fastfetch --silent
 winget install --id ScaryRawr.SL --silent
 winget install --id ImageMagick.ImageMagick --silent
+winget install --id o2sh.onefetch --silent
+winget install --id aristocratos.btop4win --silent
+winget install --id charmbracelet.vhs --silent
+winget install --id asciinema.agg --silent
+winget install --id charmbracelet.glow --silent
 
-python -m pip install pyfiglet pillow
+python -m pip install pyfiglet pillow terminaltexteffects
+
+# VHS 依赖 ttyd：winget install --id tsl0922.ttyd --silent（下载失败时手动下载，并把 ~/bin 加入 PATH）
+# curl.exe -L https://github.com/tsl0922/ttyd/releases/download/1.7.7/ttyd.win32.exe -o "$env:USERPROFILE\bin\ttyd.exe"
 py -3.13 -m pip install opencv-python   # 64 位 Python；默认 python 可能是 32 位
 
 # sl 由 winget 安装到 C:\Program Files\sl\bin，需要加入用户 PATH
@@ -90,7 +108,7 @@ if (($userPath -split ';') -notcontains $slDir) {
 
 ```powershell
 wsl -d Ubuntu-24.04 -u root -- bash -lc "apt-get update"
-wsl -d Ubuntu-24.04 -u root -- bash -lc "DEBIAN_FRONTEND=noninteractive apt-get install -y jp2a figlet toilet cbonsai nyancat cmatrix timg caca-utils libaa-bin hyfetch curl"
+wsl -d Ubuntu-24.04 -u root -- bash -lc "DEBIAN_FRONTEND=noninteractive apt-get install -y jp2a figlet toilet cbonsai nyancat cmatrix timg caca-utils libaa-bin hyfetch curl cowsay lolcat fortune-mod tty-clock boxes asciinema"
 ```
 
 `asciiquarium` 不在 Ubuntu 仓库里，需要脚本 + CPAN 模块：
@@ -126,6 +144,14 @@ ascii-image-converter -c --width 60 'C:\path\to\image.png'
 banner
 python -m pyfiglet HELLO
 sl
+
+# 新增工具
+onefetch
+btop
+glow README.md
+"HELLO" | tte decrypt
+vhs demo.tape
+agg demo.cast demo.gif
 ```
 
 ### 5.2 Ubuntu-24.04（在 WezTerm 中按 `Ctrl+Shift+1` 进入）
@@ -149,6 +175,13 @@ nyancat
 pfetch
 pipes.sh
 hyfetch
+
+# 新增工具
+cowsay "HELLO"
+fortune | cowsay | lolcat
+tty-clock -c
+echo "HELLO" | boxes -d parchment
+asciinema rec demo.cast
 ```
 
 > `cbonsai` 安装在 `/usr/games/cbonsai`，WSL 的登录 shell PATH 已包含 `/usr/games`，直接输入即可。
@@ -167,6 +200,9 @@ hyfetch
 6. **banner 覆盖**：`banner` 覆盖了 Nushell 内置命令，删除第 8 节即可恢复原版。
 7. **不要塞进 Prompt/启动**：Fastfetch、动画都不要放进 Starship 提示符或每次启动流程，
    否则会拖慢每个新标签。
+8. **tte 编码**：配置第 9 节已设置 `PYTHONIOENCODING=utf-8`；否则 Windows 的 GBK 输出会报
+   `UnicodeEncodeError`。
+9. **VHS 依赖**：`vhs` 需要 `ttyd`；本机已把 `ttyd.exe` 放到 `~/bin` 并加入 PATH。
 
 ## 7. 未安装 / 不推荐
 
@@ -195,3 +231,68 @@ hyfetch
 - [ascii.co.uk](https://ascii.co.uk)：分类齐全
 - [textart.io](https://textart.io)：在线生成与分享
 - Reddit：[r/ASCIIArt](https://www.reddit.com/r/ASCIIArt/)、[r/ANSIart](https://www.reddit.com/r/ANSIart/)
+## 10. 字体连字与 Nushell 视觉
+
+### 10.1 WezTerm 连字
+
+`config/wezterm/config/fonts.lua` 已启用：
+
+```lua
+harfbuzz_features = { "calt=1", "liga=1", "clig=1" },
+```
+
+CaskaydiaCove 支持 `->`、`=>`、`!=`、`<=`、`>=`、`===` 等连字；改字体后如连字消失，检查这几项是否被覆盖。
+
+### 10.2 Nushell 表格与 explore
+
+`config.nu` 第 9 节：
+
+```nu
+$env.config.table = ($env.config.table | merge {
+    header_on_separator: true
+    missing_value_symbol: "·"
+})
+$env.PYTHONIOENCODING = "utf-8"
+```
+
+试玩：
+
+```nu
+table --list          # 查看 Nushell 自带表格主题
+ls | explore          # 像 less 一样浏览表格，支持 :help
+sys | explore
+ls | table --theme double
+```
+
+## 11. 录制终端 GIF
+
+### 11.1 VHS（Windows 原生）
+
+`vhs` 依赖 `ttyd` 和 `ffmpeg`。一个最小 `demo.tape`：
+
+```text
+Output demo.gif
+Set Shell "nu"
+Set FontSize 20
+Set Width 800
+Set Height 300
+Type "print 'hello from vhs'"
+Enter
+Sleep 1s
+```
+
+运行：
+
+```powershell
+vhs demo.tape
+```
+
+### 11.2 asciinema + agg（WSL）
+
+```bash
+# WSL 中录制
+asciinema rec demo.cast
+# 退出录制后，用 agg 转 GIF
+agg demo.cast demo.gif
+```
+

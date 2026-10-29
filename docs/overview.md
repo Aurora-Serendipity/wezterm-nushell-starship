@@ -41,12 +41,13 @@
 | 35 条键盘绑定 + key tables            | ✅   | `config/bindings.lua`                     |
 | 鼠标右键粘贴 / Shift+右键复制         | ✅   | `config/bindings.lua`                     |
 | 7 项启动菜单 + 3 个 WSL 域            | ✅   | `config/launch.lua`、`config/domains.lua` |
-| Nushell 8 节配置                      | ✅   | `config/nushell/config.nu`                |
+| Nushell 9 节配置                      | ✅   | `config/nushell/config.nu`                |
 | 12 组命令补全                         | ✅   | `config/nushell/custom-completions/`      |
 | Starship Powerline + 右侧时间         | ✅   | `config/starship.toml`                    |
 | `vim` → `nvim` 别名                   | ✅   | `config.nu` 第 5 节                       |
 | `cc`：Claude Code 包装 + 改标签名     | ✅   | `config.nu` 第 5 节                       |
 | 终端艺术 `img`/`art`/`banner`（可选） | ✅   | `config.nu` 第 8 节                       |
+| 字体连字 + Nushell 表格视觉（可选）   | ✅   | `fonts.lua`、`config.nu` 第 9 节          |
 | Windows 11 一级右键菜单（可选）       | ✅   | `scripts/context-menu/`                   |
 | 一键安装 + 自动备份                   | ✅   | `scripts/install.ps1`                     |
 | 健康检查                              | ✅   | `scripts/verify.ps1`                      |
@@ -97,4 +98,5 @@
 - [使用手册](usage.md)
 - [组件与配置详解](components.md)
 - [终端艺术玩法](terminal-art.md)
+
 

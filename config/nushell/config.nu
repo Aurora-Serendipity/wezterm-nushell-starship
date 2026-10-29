@@ -117,3 +117,18 @@ def art [path: string] {
 def --wrapped banner [...args: string] {
     ^fastfetch ...$args
 }
+
+# ============================================================
+# 9. Nushell 表格与 explore 视觉（可选）
+# ------------------------------------------------------------
+# 表头与内容之间加分隔线，空值显示为 ·；其余保持 Nushell 默认。
+# 试玩：ls | explore；table --list 查看可用主题。
+# ============================================================
+
+$env.config.table = ($env.config.table | merge {
+    header_on_separator: true
+    missing_value_symbol: "·"
+})
+
+# Windows 下 Python 默认 GBK；tte 等使用 Unicode 方块的 CLI 需要 UTF-8。
+$env.PYTHONIOENCODING = "utf-8"

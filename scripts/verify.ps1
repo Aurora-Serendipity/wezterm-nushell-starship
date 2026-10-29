@@ -110,6 +110,9 @@ Write-Host '[ WezTerm 运行验证 ]' -ForegroundColor Cyan
 if ($wezterm -and (Test-Path -LiteralPath $WezTermConfig)) {
     $keyOut = Get-Output $wezterm @('--config-file', $WezTermConfig, 'show-keys')
     Check 'WezTerm 配置能加载（show-keys 无 ERROR/WARN）' (($keyOut -notmatch 'ERROR') -and ($keyOut -notmatch 'WARN'))
+    $fontPath = Join-Path (Split-Path -Parent $WezTermConfig) 'config\fonts.lua'
+    $fontCfg = if (Test-Path -LiteralPath $fontPath) { Get-Content -LiteralPath $fontPath -Raw } else { '' }
+    Check '字体连字已配置（harfbuzz_features）' ($fontCfg -match 'harfbuzz_features') $fontPath
     Check '自定义 leader 生效（Ctrl+A）' ($keyOut -match "Leader:\s*Char\('a'\)\s*CTRL")
     Check '键位数量合理（show-keys 行数 > 300）' (($keyOut -split "`n").Count -gt 300)
 }
@@ -135,9 +138,16 @@ if ($nu -and (Test-Path -LiteralPath $NuConfig)) {
 
     $artCount = (Get-Output $nu @('--config', $NuConfig, '-c', 'print ((scope commands | where name in ["img" "art" "banner"] | length) | into string)')).Trim()
     Check 'img/art/banner 终端艺术命令已定义' ($artCount -eq '3') "实际：$artCount / 3"
+    $tableSep = (Get-Output $nu @('--config', $NuConfig, '-c', 'print ($env.config.table.header_on_separator | into string)')).Trim()
+    Check '表格表头分隔线已启用' ($tableSep -eq 'true') "实际：$tableSep"
+    $pyenc = (Get-Output $nu @('--config', $NuConfig, '-c', 'print ($env.PYTHONIOENCODING? | default "<unset>")')).Trim()
+    Check 'Python 输出编码为 UTF-8' ($pyenc -eq 'utf-8') "实际：$pyenc"
     $chafa = Get-Command chafa -ErrorAction SilentlyContinue
     $fastfetch = Get-Command fastfetch -ErrorAction SilentlyContinue
     Info '终端艺术可选工具' "chafa=$(if ($chafa) { 'OK' } else { 'MISS' })；fastfetch=$(if ($fastfetch) { 'OK' } else { 'MISS' })"
+    $extraTools = @('onefetch','btop','vhs','agg','glow','tte')
+    $extraStatus = $extraTools | ForEach-Object { "$_=$(if (Get-Command $_ -ErrorAction SilentlyContinue) { 'OK' } else { 'MISS' })" }
+    Info '终端艺术扩展工具' ($extraStatus -join '；')
 }
 
 # ---------- Starship ----------
@@ -203,3 +213,4 @@ if ($script:fail -eq 0) {
 }
 Write-Host "通过 $script:pass 项，失败 $script:fail 项（$script:info 项提示）" -ForegroundColor Red
 exit 1
+

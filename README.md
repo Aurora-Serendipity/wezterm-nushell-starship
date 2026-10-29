@@ -11,11 +11,11 @@ WezTerm 负责窗口/标签/窗格与外观，Nushell 负责 shell 体验，Star
 - **Tokyo Night Moon 视觉方案**：一体化细标题栏、retro Powerline 标签栏、背景图层（可调透明度/亮度）、
   右侧日期时间与电池状态。
 - **增强标签标题**：自动显示序号、进程名、静态标题（铅笔图标）、管理员标记与未读高亮。
-- **Nushell 单文件分节配置**：主题微调、Starship 自动生成、启动行为、12 个命令补全、`vim=nvim`、AI CLI 包装。
-- **终端艺术小工具（可选）**：`img` / `art` / `banner` 三个 Nushell 命令，配合 chafa、Fastfetch、figlet 等工具
+- **Nushell 单文件分节配置**：主题微调、Starship 自动生成、启动行为、12 个命令补全、`vim=nvim`、AI CLI 包装、表格视觉。
+- **终端艺术小工具（可选）**：`img` / `art` / `banner` 三个 Nushell 命令，配合 chafa、Fastfetch、figlet、onefetch、VHS、tte 等工具
   （见 [终端艺术玩法](docs/terminal-art.md)）。
 - **Starship Powerline 提示符**：目录 / Git 分支与状态 / 多语言版本 / 命令耗时 / 后台任务 / 右侧时间。
-- **Cascadia Code Nerd Font**：图标完整，字体不随仓库分发，安装脚本自动下载。
+- **Cascadia Code Nerd Font**：图标完整，支持编程连字，字体不随仓库分发，安装脚本自动下载。
 - **Windows 11 一级右键菜单（可选）**：把 `Open WezTerm here` 提升到新右键菜单一级，
   文件夹空白处与文件夹上都能直接打开（无需"显示更多选项"）。
 - **健康检查脚本**：一键验证软件、字体、三份配置、键位、补全与右键菜单。
@@ -142,20 +142,20 @@ Windows 11 一级右键菜单（可选安装）：
 
 ## 文档
 
-| 文档                                   | 内容                                                    |
-| -------------------------------------- | ------------------------------------------------------- |
-| [方案总览](docs/overview.md)           | 这个方案是什么、解决什么问题、整体能力                  |
-| [架构与加载流程](docs/architecture.md) | 配置如何加载、事件/提示符/右键菜单如何工作              |
-| [安装与升级](docs/installation.md)     | 一键安装、手动安装、字体、可选组件、升级、回滚、卸载    |
-| [使用手册](docs/usage.md)              | 键位、窗格/标签、WSL、启动器、提示符、AI CLI、右键菜单  |
-| [组件与配置详解](docs/components.md)   | WezTerm 各模块、Nushell 8 节、Starship 模块、补全、脚本 |
+| 文档                                   | 内容                                                            |
+| -------------------------------------- | --------------------------------------------------------------- |
+| [方案总览](docs/overview.md)           | 这个方案是什么、解决什么问题、整体能力                          |
+| [架构与加载流程](docs/architecture.md) | 配置如何加载、事件/提示符/右键菜单如何工作                      |
+| [安装与升级](docs/installation.md)     | 一键安装、手动安装、字体、可选组件、升级、回滚、卸载            |
+| [使用手册](docs/usage.md)              | 键位、窗格/标签、WSL、启动器、提示符、AI CLI、右键菜单          |
+| [组件与配置详解](docs/components.md)   | WezTerm 各模块、Nushell 9 节、Starship 模块、补全、脚本         |
 | [终端艺术玩法](docs/terminal-art.md)   | img/art/banner 三个命令、chafa/Fastfetch/figlet 与 WSL 工具安装 |
-| [定制指南](docs/customization.md)      | 主题、背景、字体、键位、启动项、WSL、提示符、补全       |
-| [常见问题 FAQ](docs/faq.md)            | 配置不生效、字体方块、提示符异常、右键菜单、网络等      |
-| [排错手册](docs/troubleshooting.md)    | 逐层排查方法与常见故障修复                              |
-| [设计取舍](docs/design.md)             | 为什么这样设计、参考了哪些方案、放弃了什么              |
-| [变更记录](docs/changelog.md)          | 从单文件配置到本仓库的完整演进过程                      |
-| [文件参考](docs/file-reference.md)     | 每个文件的职责与关键配置项                              |
+| [定制指南](docs/customization.md)      | 主题、背景、字体、键位、启动项、WSL、提示符、补全               |
+| [常见问题 FAQ](docs/faq.md)            | 配置不生效、字体方块、提示符异常、右键菜单、网络等              |
+| [排错手册](docs/troubleshooting.md)    | 逐层排查方法与常见故障修复                                      |
+| [设计取舍](docs/design.md)             | 为什么这样设计、参考了哪些方案、放弃了什么                      |
+| [变更记录](docs/changelog.md)          | 从单文件配置到本仓库的完整演进过程                              |
+| [文件参考](docs/file-reference.md)     | 每个文件的职责与关键配置项                                      |
 
 ## 安装 Windows 11 一级右键菜单（可选）
 
@@ -201,5 +201,3 @@ A complete, tested Windows 11 terminal setup built on WezTerm (modular Lua confi
 Starship (Tokyo Night powerline prompt). It includes one-command installation, a health-check script,
 12 shell completions, AI-CLI tab-title wrapper, and an optional Windows 11 top-level Explorer context
 menu entry ("Open WezTerm here"). Full documentation is in Chinese under [`docs/`](docs/).
-
-

@@ -19,7 +19,7 @@
 | `init.lua`       | `Config:init()/append()`、重复项告警、`config_builder` 校验                                                                                                                                                                                                                                         |
 | `general.lua`    | `automatically_reload_config`、`exit_behavior=CloseOnCleanExit`、`scrollback_lines=5000`、`canonicalize_pasted_newlines=CarriageReturn`、`status_update_interval=1000`、超链接规则                                                                                                                  |
 | `appearance.lua` | `color_scheme="Tokyo Night Moon"`、`colors` 覆盖、背景图层（居中裁剪 + hsb brightness 0.9）、`window_background_opacity=0.7`、一体化标题栏、`initial_cols=130` / `initial_rows=50`、`window_padding=6`、retro 标签栏（显示序号、`tab_max_width=25`）、滚动条、光标、`inactive_pane_hsb`、macOS 分支 |
-| `fonts.lua`      | `CaskaydiaCove Nerd Font`、`font_size=13`                                                                                                                                                                                                                                                           |
+| `fonts.lua`      | `CaskaydiaCove Nerd Font`、`font_size=13`、`harfbuzz_features`（连字）                                                                                                                                                                                                                               |
 | `launch.lua`     | `default_prog`（Nushell）、7 项 `launch_menu`（PowerShell/Cmd/pwsh/Nushell/3 个 WSL）                                                                                                                                                                                                               |
 | `bindings.lua`   | leader `Ctrl+A`、35 条键位、`resize_pane` / `resize_font` 键表、4 条鼠标绑定（左键选中复制、Ctrl+左键开链接、右键粘贴、Shift+右键复制）                                                                                                                                                             |
 | `domains.lua`    | 空的 SSH/Unix 域；3 个 WSL 域声明                                                                                                                                                                                                                                                                   |
@@ -58,7 +58,7 @@
 
 ## 2. Nushell 配置
 
-文件：`config/nushell/config.nu`（8 节）
+文件：`config/nushell/config.nu`（9 节）
 
 | 节         | 内容                                                                                           | 说明                                     |
 | ---------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------- |
@@ -70,6 +70,7 @@
 | 6 代理     | 仅注释说明未采纳                                                                               | 不自动设置代理                           |
 | 7 工具别名 | 仅注释说明未采纳                                                                               | 不绑定个人路径                           |
 | 8 终端艺术 | `def img` / `def art` / `def --wrapped banner`                                                 | 依赖 chafa / fastfetch / wezterm imgcat  |
+| 9 视觉细节 | `table.header_on_separator`、`missing_value_symbol`、`PYTHONIOENCODING`                         | 表头分隔线 / UTF-8                        |
 
 ### 2.1 `env.nu`
 
@@ -140,6 +141,7 @@
 
 - 字体：CaskaydiaCove Nerd Font（Nerd Fonts v3 字形集）；
 - 字号：13；
+- 连字：`harfbuzz_features = { "calt=1", "liga=1", "clig=1" }`；
 - 缺失字形由 WezTerm 内置字体兜底；
 - 字体不随仓库分发，安装脚本按需下载。
 
@@ -156,4 +158,5 @@
 - [文件参考](file-reference.md)
 - [定制指南](customization.md)
 - [排错手册](troubleshooting.md)
+
 
