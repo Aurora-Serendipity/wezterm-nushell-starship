@@ -161,6 +161,16 @@
 - VHS 在补齐 ttyd 后成功录制 GIF；onefetch、btop、glow、agg 可用；
 - WSL 新工具均可运行。
 
+## 阶段 9：WSL 兼容性修正（2026-10-31）
+
+**修正**：
+
+- `aafire` 在 WSLg 下因 `DISPLAY=:0` 走 X11 驱动，报 `X Error ... BadName`；文档改为 `env -u DISPLAY aafire`；
+- chafa 的 `--size 80x40` 会留下黑色补边，文档增加 `--fit-width` / `--stretch` / `--fg-only` 方案；
+- `art` / `img` 回退路径改为 `chafa --fit-width`，避免同样黑边。
+
+**实测**：`env -u DISPLAY aafire`、`chafa --fit-width` 在 WezTerm WSL 标签页中正常。
+
 ## 版本矩阵（发布时）
 
 | 组件        | 版本                             |
@@ -189,4 +199,3 @@
 - 背景图版权归原作者，仅随本配置分享；
 - WSL 发行版名称是示例；
 - Windows 10 不支持新右键菜单机制。
-

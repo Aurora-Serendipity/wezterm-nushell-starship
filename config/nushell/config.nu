@@ -104,13 +104,13 @@ def img [path: string] {
     if ((($env.WEZTERM_PANE? | default "") | is-empty) == false) {
         ^wezterm imgcat $path
     } else {
-        ^chafa --size 80x40 $path
+        ^chafa --fit-width $path
     }
 }
 
-# art：彩色字符/方块画
+# art：彩色字符/方块画；按终端宽度填满，避免固定画布留下黑边
 def art [path: string] {
-    ^chafa --size 80x40 --symbols block --colors 256 $path
+    ^chafa --fit-width --symbols block --colors 256 $path
 }
 
 # banner：系统信息（Fastfetch），可透传 fastfetch 参数

@@ -176,6 +176,9 @@ pfetch
 pipes.sh
 hyfetch
 
+# WSLg 下必须去掉 DISPLAY，否则 libaa 会走 X11 字体并报 BadName
+env -u DISPLAY aafire
+
 # 新增工具
 cowsay "HELLO"
 fortune | cowsay | lolcat
@@ -185,6 +188,28 @@ asciinema rec demo.cast
 ```
 
 > `cbonsai` 安装在 `/usr/games/cbonsai`，WSL 的登录 shell PATH 已包含 `/usr/games`，直接输入即可。
+
+### 5.3 chafa 的字符风格（避免黑边）
+
+`--size 80x40` 是**最大画布**：按原图比例缩放后，右侧可能补黑边。
+用 `--fit-width` 让图片填满终端宽度，或者用 `--stretch` 强制铺满固定画布（会变形）。
+
+```bash
+# 推荐：填满宽度，按比例决定高度，不会留黑边
+chafa -f symbols --fit-width --symbols braille --colors 256 "$IMG"
+chafa -f symbols --fit-width --symbols half    --colors 256 "$IMG"
+chafa -f symbols --fit-width --symbols sextant --colors 256 "$IMG"
+chafa -f symbols --fit-width --symbols quad    --colors 256 "$IMG"
+
+# 固定 80x40：强制拉伸填满
+chafa -f symbols --size 80x40 --stretch --symbols block --colors 256 "$IMG"
+
+# 透明背景（不显示黑色填充，适合你的壁纸）
+chafa -f symbols --size 80x40 --fg-only --symbols braille --colors 256 "$IMG"
+
+# 原生图像协议（高清，不可复制）
+chafa -f iterm --fit-width "$IMG"
+```
 
 ## 6. 注意事项
 
@@ -203,6 +228,10 @@ asciinema rec demo.cast
 8. **tte 编码**：配置第 9 节已设置 `PYTHONIOENCODING=utf-8`；否则 Windows 的 GBK 输出会报
    `UnicodeEncodeError`。
 9. **VHS 依赖**：`vhs` 需要 `ttyd`；本机已把 `ttyd.exe` 放到 `~/bin` 并加入 PATH。
+10. **aafire 的 X Error**：WSLg 设置了 `DISPLAY=:0`，libaa 会选 X11 驱动并找不存在的字体；
+    用 `env -u DISPLAY aafire`，或在当前 WSL 会话执行 `unset DISPLAY` 后再运行。
+11. **chafa 黑边**：`--size 80x40` 固定的是最大画布，按比例缩放后可能用黑色补齐右侧；
+    想填满宽度用 `--fit-width`，想严格 80x40 用 `--stretch`，想保留壁纸用 `--fg-only`。
 
 ## 7. 未安装 / 不推荐
 
@@ -222,6 +251,7 @@ asciinema rec demo.cast
 - 用 `timg -pk` / `-ps` 测试 WezTerm 的 Kitty/Sixel 输出并截图；
 - 用 Python + OpenCV 复现文章里的"读图 → 缩放 → 亮度映射"算法；
 - 把常用命令收进一个 `art-help` 帮助函数，减少记忆成本。
+
 ## 9. 资源网站
 
 文章里提到的在线资源，浏览器打开即可，无需安装：
@@ -231,6 +261,7 @@ asciinema rec demo.cast
 - [ascii.co.uk](https://ascii.co.uk)：分类齐全
 - [textart.io](https://textart.io)：在线生成与分享
 - Reddit：[r/ASCIIArt](https://www.reddit.com/r/ASCIIArt/)、[r/ANSIart](https://www.reddit.com/r/ANSIart/)
+
 ## 10. 字体连字与 Nushell 视觉
 
 ### 10.1 WezTerm 连字
@@ -295,4 +326,3 @@ asciinema rec demo.cast
 # 退出录制后，用 agg 转 GIF
 agg demo.cast demo.gif
 ```
-
