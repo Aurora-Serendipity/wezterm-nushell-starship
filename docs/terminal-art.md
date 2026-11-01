@@ -46,7 +46,7 @@ banner --logo none
 | ANSI Art     | 直接 `cat` 或专用编辑器  | 复古 BBS 风格          | 需要自己创作                                |
 
 WezTerm 支持 iTerm2 图像协议（`wezterm imgcat` 已内置可用）；较新的 WezTerm 文档还列出 Kitty / Sixel
-图形协议，`timg` 等工具可以尝试 `-pk`（Kitty）或 `-ps`（Sixel）。
+图形协议，`timg` 等工具可以尝试 `-pk`（Kitty）、`-pi`（iTerm2）或 `-ps`（Sixel）。
 
 ## 3. 本机安装了什么
 
@@ -60,7 +60,6 @@ WezTerm 支持 iTerm2 图像协议（`wezterm imgcat` 已内置可用）；较�
 | ImageMagick           | `magick`                | 7.1.2-34     |
 | pyfiglet              | `python -m pyfiglet`    | 1.0.4        |
 | Pillow                | Python 包               | 12.2.0       |
-| OpenCV                | 用 `py -3.13` 导入      | 5.0.0        |
 | sl                    | `sl`（已加入 PATH）     | 6.1.5        |
 | WezTerm imgcat        | `wezterm imgcat`        | 随 WezTerm   |
 | onefetch              | `onefetch`              | 3.1.0        |
@@ -99,7 +98,6 @@ python -m pip install pyfiglet pillow terminaltexteffects
 
 # VHS 依赖 ttyd：winget install --id tsl0922.ttyd --silent（下载失败时手动下载，并把 ~/bin 加入 PATH）
 # curl.exe -L https://github.com/tsl0922/ttyd/releases/download/1.7.7/ttyd.win32.exe -o "$env:USERPROFILE\bin\ttyd.exe"
-py -3.13 -m pip install opencv-python   # 64 位 Python；默认 python 可能是 32 位
 
 # sl 由 winget 安装到 C:\Program Files\sl\bin，需要加入用户 PATH
 $slDir = 'C:\Program Files\sl\bin'
@@ -170,8 +168,10 @@ IMG=/mnt/c/Users/Aurora-Serendipity/wezterm-nushell-starship/docs/images/wezterm
 
 jp2a --width=80 "$IMG"
 img2txt --width=80 --height=40 "$IMG"
-timg -pk "$IMG"          # Kitty；-ps 为 Sixel；不生效时直接 timg "$IMG"
-timg "$IMG"
+timg -pi "$IMG"          # iTerm2；-pk 为 Kitty，-ps 为 Sixel
+timg -ps "$IMG"
+timg -pk "$IMG"
+timg "$IMG"              # 默认 Unicode 半块
 
 figlet HELLO
 toilet -f big -F metal HELLO
@@ -240,18 +240,17 @@ art-img2txt "$IMG" 100 40
 art-timg "$IMG" sixel
 ```
 
-> `art-timg` 的 `iterm2` 模式当前不会在 WezTerm 显示；用默认 `kitty` 或 `sixel`。
+> `art-timg` 的 `kitty` / `iterm2` / `sixel` 模式均已实测可显示；默认用 `kitty`。
 ## 6. 注意事项
 
 1. **背景透明度**：本配置有背景图 + `window_background_opacity = 0.7`，字符画的暗部可能与壁纸混在一起；
    追求干净效果时可临时把透明度调成 1.0，或换一个无背景的标签页。
 2. **图片能否复制**：`img` / `wezterm imgcat` 是原生图像，通常不能复制或进入 scrollback；
    需要可复制的图就用 `art` / chafa。
-3. **Python 版本**：默认 `python` 是 32 位 3.13，OpenCV 装在 64 位 Python，使用 `py -3.13` 调用；
-   `pyfiglet` 普通 `python -m pyfiglet` 即可。
+3. **Python 版本**：`pyfiglet` 用默认 `python -m pyfiglet` 即可。
 4. **WSL 路径**：WSL 里访问 Windows 文件要用 `/mnt/c/...`；直接 `cd /mnt/c/Users/...`。
-5. **timg / 协议**：本机实测 WezTerm 20261010 下 `-pk`（Kitty）和 `-ps`（Sixel）显示正常；
-   `-pi`（iTerm2）没有显示出来，但 `wezterm imgcat` 的 iTerm2 路径正常。默认半块模式可作回退。
+5. **timg / 协议**：本机实测 WezTerm 20261010 下 `-pk`（Kitty）、`-pi`（iTerm2）和 `-ps`（Sixel）
+   均能显示；默认半块模式可作回退。
 6. **banner 覆盖**：`banner` 覆盖了 Nushell 内置命令，删除第 8 节即可恢复原版。
 7. **不要塞进 Prompt/启动**：Fastfetch、动画都不要放进 Starship 提示符或每次启动流程，
    否则会拖慢每个新标签。
@@ -279,7 +278,7 @@ art-timg "$IMG" sixel
 
 - `img` 已支持 `--width` 参数（仅 WezTerm 原生图像生效）；
 - WSL zsh 已加入 `art-jp2a`、`art-img2txt`、`art-timg`、`art-help`；
-- `timg` 协议已实测：Kitty / Sixel 正常，iTerm2 模式当前不显示，默认半块可回退；
+- `timg` 协议已实测：Kitty / Sixel / iTerm2 均正常，默认半块可回退；
 - Nushell 已加入 `art-help` 命令速查。
 
 ## 9. 资源网站
@@ -356,5 +355,13 @@ asciinema rec demo.cast
 # 退出录制后，用 agg 转 GIF
 agg demo.cast demo.gif
 ```
+
+
+
+
+
+
+
+
 
 

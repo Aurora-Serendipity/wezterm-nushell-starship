@@ -132,7 +132,7 @@
 **新增**：
 
 - `config.nu` 第 8 节：`img` / `art` / `banner` 三个 Nushell 命令；
-- Windows 原生：chafa、ascii-image-converter、Fastfetch、ImageMagick、pyfiglet、Pillow、OpenCV（64 位 Python）、sl；
+- Windows 原生：chafa、ascii-image-converter、Fastfetch、ImageMagick、pyfiglet、Pillow、sl；
 - Ubuntu-24.04 WSL：jp2a、figlet、toilet、cmatrix、cbonsai、asciiquarium、nyancat、img2txt、timg、pfetch、pipes.sh、hyfetch；
 - 文档：`docs/terminal-art.md`（安装、分工、试玩与注意事项）。
 
@@ -177,9 +177,9 @@
 
 - `img` 增加 `--width` 参数；
 - WSL zsh 增加 `art-jp2a` / `art-img2txt` / `art-timg` / `art-help`；
-- 实测 timg 协议：Kitty / Sixel 正常，iTerm2 不显示，默认半块可回退；
+- 实测 timg 协议：Kitty / Sixel / iTerm2 均正常，默认半块可回退；
 - Nushell 增加 `art-help` 速查命令；
-- 文档移除 OpenCV 字符画待办，并补齐已装工具与 WSL 包装函数说明。
+- 文档移除不再计划的字符画待办，并补齐已装工具与 WSL 包装函数说明。
 
 **实测**：健康检查 34 项通过。
 
@@ -211,5 +211,8 @@
 - 背景图版权归原作者，仅随本配置分享；
 - WSL 发行版名称是示例；
 - Windows 10 不支持新右键菜单机制。
+
+
+
 
 
