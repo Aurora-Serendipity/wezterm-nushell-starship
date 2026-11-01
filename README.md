@@ -12,7 +12,7 @@ WezTerm 负责窗口/标签/窗格与外观，Nushell 负责 shell 体验，Star
   右侧日期时间与电池状态。
 - **增强标签标题**：自动显示序号、进程名、静态标题（铅笔图标）、管理员标记与未读高亮。
 - **Nushell 单文件分节配置**：主题微调、Starship 自动生成、启动行为、12 个命令补全、`vim=nvim`、AI CLI 包装、表格视觉。
-- **终端艺术小工具（可选）**：`img` / `art` / `banner` 三个 Nushell 命令，配合 chafa、Fastfetch、figlet、onefetch、VHS、tte 等工具
+- **终端艺术小工具（可选）**：`img` / `art` / `banner` / `art-help`，`img` 支持 `--width`；配合 chafa、Fastfetch、figlet、onefetch、VHS、tte 等工具
   （见 [终端艺术玩法](docs/terminal-art.md)）。
 - **Starship Powerline 提示符**：目录 / Git 分支与状态 / 多语言版本 / 命令耗时 / 后台任务 / 右侧时间。
 - **Cascadia Code Nerd Font**：图标完整，支持编程连字，字体不随仓库分发，安装脚本自动下载。
@@ -201,3 +201,4 @@ A complete, tested Windows 11 terminal setup built on WezTerm (modular Lua confi
 Starship (Tokyo Night powerline prompt). It includes one-command installation, a health-check script,
 12 shell completions, AI-CLI tab-title wrapper, and an optional Windows 11 top-level Explorer context
 menu entry ("Open WezTerm here"). Full documentation is in Chinese under [`docs/`](docs/).
+

@@ -3,19 +3,20 @@
 > 返回：[README](../README.md) · 相关：[使用手册](usage.md) · [定制指南](customization.md)
 
 本文记录本仓库配套的终端艺术工具（chafa / Fastfetch / figlet / cmatrix / timg，以及 onefetch / btop / VHS / tte 等）的安装命令、
-在 Windows 与 WSL 中的分工，以及 `config.nu` 里的 `img` / `art` / `banner` 三个快捷命令。
+在 Windows 与 WSL 中的分工，以及 `config.nu` 里的 `img` / `art` / `banner` / `art-help` 四个快捷命令。
 
 灵感与工具清单来自：[《终端 ASCII 艺术 · 完整手册》](https://mp.weixin.qq.com/s/A4uJLqTB5VNw_FxqcfZ4hw)。
 
-## 1. 三个快捷命令（默认 Nushell）
+## 1. 四个快捷命令（默认 Nushell）
 
 已在 `config/nushell/config.nu` 第 8 节定义：
 
-| 命令         | 作用                                                          | 依赖               |
-| ------------ | ------------------------------------------------------------- | ------------------ |
-| `img <图片>` | WezTerm 内用内置图像协议显示原图；其他终端回退到 chafa 字符画 | `wezterm`、`chafa` |
-| `art <图片>` | 用 chafa 生成彩色字符/方块画                                  | `chafa`            |
-| `banner`     | 系统信息（Fastfetch），支持透传 fastfetch 参数                | `fastfetch`        |
+| 命令                     | 作用                                                          | 依赖               |
+| ------------------------ | ------------------------------------------------------------- | ------------------ |
+| `img <图片> [--width N]` | WezTerm 原生高清图；`--width` 控制列宽，其他终端回退 chafa    | `wezterm`、`chafa` |
+| `art <图片>`             | 用 chafa 生成彩色字符/方块画（按终端宽度）                    | `chafa`            |
+| `banner`                 | 系统信息（Fastfetch），支持透传 fastfetch 参数                | `fastfetch`        |
+| `art-help`               | 汇总 Windows / WSL 的终端艺术命令                             | 无                 |
 
 > 字体连字、Nushell 表格视觉见第 10 节。
 
@@ -30,6 +31,8 @@ banner --logo none
 
 - `img` 在 WezTerm 内实际调用 `wezterm imgcat`，显示高清原图；在 Windows Terminal / SSH 等环境
   会自动退回 chafa 字符画。
+- `img --width N` 只影响 WezTerm 原生图像；chafa 回退仍按终端宽度填充。
+- `art-help` 汇总 Windows 与 WSL 的常用命令。
 - `banner` 会覆盖 Nushell 内置的 `banner` 命令（内置命令只显示 Nushell 启动信息）；
   不想要时删除 `config.nu` 第 8 节即可恢复。
 - `banner` 不放入启动流程；需要时手动运行，避免拖慢每个新标签。
@@ -71,8 +74,10 @@ WezTerm 支持 iTerm2 图像协议（`wezterm imgcat` 已内置可用）；较�
 ### 3.2 Ubuntu-24.04（WSL）
 
 `jp2a`、`figlet`、`toilet`、`showfigfonts`、`cmatrix`、`cbonsai`、`asciiquarium`、`nyancat`、
-`img2txt`（caca-utils）、`libaa-bin`、`timg`、`pfetch`、`pipes.sh`、`hyfetch`；
-扩展：`cowsay`、`lolcat`、`fortune`、`tty-clock`、`boxes`、`asciinema`。
+`img2txt`（caca-utils）、`timg`、`pfetch`、`pipes.sh`、`hyfetch`；
+`libaa-bin` 提供 `aafire`，`caca-utils` 提供 `cacademo` / `cacaview`；
+扩展：`cowsay`、`lolcat`、`fortune`、`tty-clock`、`boxes`、`asciinema`；
+WSL 也有 `chafa` 1.14.0（本机 apt 安装）。
 
 ## 4. 复现安装命令
 
@@ -136,9 +141,13 @@ sudo chmod +x /usr/local/bin/pfetch /usr/local/bin/pipes.sh
 ```nu
 # 图片
 img 'C:\path\to\image.png'
+img 'C:\path\to\image.png' --width 40
 art 'C:\path\to\image.png'
 wezterm imgcat 'C:\path\to\image.png' --width 80
 ascii-image-converter -c --width 60 'C:\path\to\image.png'
+
+# 命令速查
+art-help
 
 # 系统信息 / 艺术字 / 动画
 banner
@@ -176,8 +185,9 @@ pfetch
 pipes.sh
 hyfetch
 
-# WSLg 下必须去掉 DISPLAY，否则 libaa 会走 X11 字体并报 BadName
-env -u DISPLAY aafire
+# 本机已装 /usr/local/bin/aafire 包装（自动 unset DISPLAY）
+aafire
+# 其它 WSL 未包装时：env -u DISPLAY aafire
 
 # 新增工具
 cowsay "HELLO"
@@ -211,6 +221,26 @@ chafa -f symbols --size 80x40 --fg-only --symbols braille --colors 256 "$IMG"
 chafa -f iterm --fit-width "$IMG"
 ```
 
+### 5.4 WSL zsh 包装函数（本机已配置）
+
+`~/.zshrc` 末尾已加入（原文件备份为 `~/.zshrc.bak-art-*`）：
+
+| 函数 | 用法 |
+| --- | --- |
+| `art-jp2a` | `art-jp2a [图片] [宽度]`，默认仓库截图、宽 80 |
+| `art-img2txt` | `art-img2txt [图片] [宽] [高]`，默认 80×40 |
+| `art-timg` | `art-timg [图片] [kitty|iterm2|sixel|half|auto]`，默认 kitty |
+| `art-help` | 列出 WSL 侧终端艺术命令 |
+
+示例：
+
+```bash
+art-jp2a
+art-img2txt "$IMG" 100 40
+art-timg "$IMG" sixel
+```
+
+> `art-timg` 的 `iterm2` 模式当前不会在 WezTerm 显示；用默认 `kitty` 或 `sixel`。
 ## 6. 注意事项
 
 1. **背景透明度**：本配置有背景图 + `window_background_opacity = 0.7`，字符画的暗部可能与壁纸混在一起；
@@ -220,8 +250,8 @@ chafa -f iterm --fit-width "$IMG"
 3. **Python 版本**：默认 `python` 是 32 位 3.13，OpenCV 装在 64 位 Python，使用 `py -3.13` 调用；
    `pyfiglet` 普通 `python -m pyfiglet` 即可。
 4. **WSL 路径**：WSL 里访问 Windows 文件要用 `/mnt/c/...`；直接 `cd /mnt/c/Users/...`。
-5. **timg / 协议**：`timg -pk`/`-ps` 依赖终端支持；WezTerm 支持 iTerm2/Kitty/Sixel 时可用，
-   否则用默认 Unicode 半块模式。
+5. **timg / 协议**：本机实测 WezTerm 20261010 下 `-pk`（Kitty）和 `-ps`（Sixel）显示正常；
+   `-pi`（iTerm2）没有显示出来，但 `wezterm imgcat` 的 iTerm2 路径正常。默认半块模式可作回退。
 6. **banner 覆盖**：`banner` 覆盖了 Nushell 内置命令，删除第 8 节即可恢复原版。
 7. **不要塞进 Prompt/启动**：Fastfetch、动画都不要放进 Starship 提示符或每次启动流程，
    否则会拖慢每个新标签。
@@ -229,7 +259,8 @@ chafa -f iterm --fit-width "$IMG"
    `UnicodeEncodeError`。
 9. **VHS 依赖**：`vhs` 需要 `ttyd`；本机已把 `ttyd.exe` 放到 `~/bin` 并加入 PATH。
 10. **aafire 的 X Error**：WSLg 设置了 `DISPLAY=:0`，libaa 会选 X11 驱动并找不存在的字体；
-    用 `env -u DISPLAY aafire`，或在当前 WSL 会话执行 `unset DISPLAY` 后再运行。
+    本机已在 `/usr/local/bin/aafire` 加包装器，直接 `aafire` 即可；其它 WSL 用
+    `env -u DISPLAY aafire`，或 `unset DISPLAY` 后再运行。
 11. **chafa 黑边**：`--size 80x40` 固定的是最大画布，按比例缩放后可能用黑色补齐右侧；
     想填满宽度用 `--fit-width`，想严格 80x40 用 `--stretch`，想保留壁纸用 `--fg-only`。
 
@@ -244,13 +275,12 @@ chafa -f iterm --fit-width "$IMG"
 | PabloDraw / Moebius / ASCII Art Studio | 桌面绘图软件，不属于终端内工具；想创作 ANSI Art 时再单独使用 |
 | asciiart.eu / 16colors.jp 等           | 在线资源，浏览器访问即可，无需安装                           |
 
-## 8. 还可以做什么
+## 8. 这轮已完成的扩展
 
-- 给 `img` 增加 `--width` 参数（现在固定由 `wezterm imgcat` 自动选尺寸）；
-- 为 WSL 里的 `jp2a`/`img2txt`/`timg` 写 bash/PowerShell 包装函数；
-- 用 `timg -pk` / `-ps` 测试 WezTerm 的 Kitty/Sixel 输出并截图；
-- 用 Python + OpenCV 复现文章里的"读图 → 缩放 → 亮度映射"算法；
-- 把常用命令收进一个 `art-help` 帮助函数，减少记忆成本。
+- `img` 已支持 `--width` 参数（仅 WezTerm 原生图像生效）；
+- WSL zsh 已加入 `art-jp2a`、`art-img2txt`、`art-timg`、`art-help`；
+- `timg` 协议已实测：Kitty / Sixel 正常，iTerm2 模式当前不显示，默认半块可回退；
+- Nushell 已加入 `art-help` 命令速查。
 
 ## 9. 资源网站
 
@@ -326,3 +356,5 @@ asciinema rec demo.cast
 # 退出录制后，用 agg 转 GIF
 agg demo.cast demo.gif
 ```
+
+

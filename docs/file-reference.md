@@ -97,7 +97,7 @@ wezterm-nushell-starship/
 | 补全              | 12 条 use/source                                  | 第 4 节 |
 | vim               | `alias vim = nvim`                                | 第 5 节 |
 | cc                | `def --wrapped cc`                                | 第 5 节 |
-| 终端艺术          | `img` / `art` / `banner`                          | 第 8 节 |
+| 终端艺术          | `img [--width]` / `art` / `banner` / `art-help`   | 第 8 节 |
 | 表格视觉          | `header_on_separator=true`、`missing_value_symbol=·` | 第 9 节 |
 | Python 编码       | `PYTHONIOENCODING=utf-8`                          | 第 9 节 |
 
@@ -149,6 +149,7 @@ wezterm-nushell-starship/
 | `%APPDATA%\nushell\vendor\autoload\starship.nu` | 每次启动 Nushell 重新生成  |
 | `*.bak-<时间戳>`                                | 安装脚本备份               |
 | `config/nushell/history.txt`                    | Nushell 历史（.gitignore） |
+
 
 
 

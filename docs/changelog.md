@@ -171,6 +171,18 @@
 
 **实测**：`env -u DISPLAY aafire`、`chafa --fit-width` 在 WezTerm WSL 标签页中正常。
 
+## 阶段 10：终端艺术待办完成（2026-11-01）
+
+**完成**：
+
+- `img` 增加 `--width` 参数；
+- WSL zsh 增加 `art-jp2a` / `art-img2txt` / `art-timg` / `art-help`；
+- 实测 timg 协议：Kitty / Sixel 正常，iTerm2 不显示，默认半块可回退；
+- Nushell 增加 `art-help` 速查命令；
+- 文档移除 OpenCV 字符画待办，并补齐已装工具与 WSL 包装函数说明。
+
+**实测**：健康检查 34 项通过。
+
 ## 版本矩阵（发布时）
 
 | 组件        | 版本                             |
@@ -188,7 +200,7 @@
 - WezTerm 配置加载无 ERROR/WARN；`show-keys` 基线行全部保留；
 - Nushell 配置可加载；`native-clip`、right prompt、`cc`、12 组合集补全；
 - Starship 左右提示符正常；c/cpp 模块在对应目录出现；
-- 健康检查 32 项全部通过（含可选右键菜单检查）；
+- 健康检查 34 项全部通过（含可选右键菜单检查）；
 - Windows 11 右键菜单一级项实测可用；
 - 安装脚本离线模式重装实测通过。
 
@@ -199,3 +211,5 @@
 - 背景图版权归原作者，仅随本配置分享；
 - WSL 发行版名称是示例；
 - Windows 10 不支持新右键菜单机制。
+
+

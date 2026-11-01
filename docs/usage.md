@@ -184,10 +184,12 @@ Ctrl+Shift+1    # 新标签里开 WSL
 
 ## 12. 终端艺术快捷命令（可选）
 
-- `img '<图片>'`：WezTerm 内用 `wezterm imgcat` 高清显示原图，其它终端回退到 chafa；
-- `art '<图片>'`：chafa 彩色字符/方块画；
-- `banner`：Fastfetch 系统信息。
+- `img '<图片>' [--width N]`：WezTerm 内用 `wezterm imgcat` 高清显示原图，其它终端回退到 chafa；
+- `art '<图片>'`：chafa 彩色字符/方块画（按终端宽度）；
+- `banner`：Fastfetch 系统信息；
+- `art-help`：终端艺术命令速查。
 
+WSL zsh 还提供 `art-jp2a` / `art-img2txt` / `art-timg` / `art-help`。
 安装命令与完整玩法见 [终端艺术玩法](terminal-art.md)。
 
 ## 13. 相关文档
@@ -197,4 +199,5 @@ Ctrl+Shift+1    # 新标签里开 WSL
 - [常见问题](faq.md)
 - [排错手册](troubleshooting.md)
 - [终端艺术玩法](terminal-art.md)
+
 

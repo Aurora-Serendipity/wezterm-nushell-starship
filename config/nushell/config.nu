@@ -100,9 +100,14 @@ def --wrapped cc [...args: string] {
 # ============================================================
 
 # img：WezTerm 内用内置图像协议显示原图；其它终端回退到 chafa 字符画
-def img [path: string] {
+# --width N：仅对 WezTerm 原生图像生效；chafa 回退仍按终端宽度填充
+def img [path: string, --width: int] {
     if ((($env.WEZTERM_PANE? | default "") | is-empty) == false) {
-        ^wezterm imgcat $path
+        if $width == null {
+            ^wezterm imgcat $path
+        } else {
+            ^wezterm imgcat --width $width $path
+        }
     } else {
         ^chafa --fit-width $path
     }
@@ -116,6 +121,32 @@ def art [path: string] {
 # banner：系统信息（Fastfetch），可透传 fastfetch 参数
 def --wrapped banner [...args: string] {
     ^fastfetch ...$args
+}
+
+# art-help：终端艺术命令速查
+def art-help [] {
+    print ([
+        "终端艺术命令速查"
+        ""
+        "Windows / 默认 Nushell："
+        "  img '<图片>' [--width N]   WezTerm 原生高清图；其它终端回退 chafa"
+        "  art '<图片>'               彩色字符/方块画（按终端宽度）"
+        "  banner                      Fastfetch 系统信息"
+        "  onefetch                    当前仓库语言统计"
+        "  btop                        系统监控"
+        "  tte decrypt                 文字动画（也可 tte matrix 等）"
+        "  glow README.md              终端 Markdown"
+        "  vhs demo.tape               VHS 录制终端 GIF"
+        "  agg demo.cast demo.gif      asciinema 录制转 GIF"
+        ""
+        "Ubuntu-24.04 WSL（Ctrl+Shift+1）："
+        "  art-jp2a [图片] [宽度]        jp2a 黑白字符画"
+        "  art-img2txt [图片] [宽] [高]  caca 彩色字符画"
+        "  art-timg [图片] [kitty|iterm2|sixel|half]"
+        "  aafire / cacademo / cacaview  libaa / libcaca 彩蛋"
+        "  cmatrix / cbonsai / asciiquarium / nyancat / pipes.sh"
+        "  pfetch / hyfetch / figlet / toilet / timg"
+    ] | str join (char nl))
 }
 
 # ============================================================

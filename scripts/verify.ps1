@@ -138,6 +138,10 @@ if ($nu -and (Test-Path -LiteralPath $NuConfig)) {
 
     $artCount = (Get-Output $nu @('--config', $NuConfig, '-c', 'print ((scope commands | where name in ["img" "art" "banner"] | length) | into string)')).Trim()
     Check 'img/art/banner 终端艺术命令已定义' ($artCount -eq '3') "实际：$artCount / 3"
+    $imgHelp = Get-Output $nu @('--config', $NuConfig, '-c', 'help img | to text')
+    Check 'img 支持 --width 参数' ($imgHelp -match '--width')
+    $helpCount = (Get-Output $nu @('--config', $NuConfig, '-c', 'print ((scope commands | where name == "art-help" | length) | into string)')).Trim()
+    Check 'art-help 已定义' ($helpCount -eq '1') "实际：$helpCount"
     $tableSep = (Get-Output $nu @('--config', $NuConfig, '-c', 'print ($env.config.table.header_on_separator | into string)')).Trim()
     Check '表格表头分隔线已启用' ($tableSep -eq 'true') "实际：$tableSep"
     $pyenc = (Get-Output $nu @('--config', $NuConfig, '-c', 'print ($env.PYTHONIOENCODING? | default "<unset>")')).Trim()
@@ -213,4 +217,5 @@ if ($script:fail -eq 0) {
 }
 Write-Host "通过 $script:pass 项，失败 $script:fail 项（$script:info 项提示）" -ForegroundColor Red
 exit 1
+
 

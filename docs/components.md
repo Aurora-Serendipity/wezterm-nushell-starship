@@ -69,7 +69,7 @@
 | 5 别名     | `alias vim = nvim`；`def --wrapped cc`                                                         | AI CLI 包装                              |
 | 6 代理     | 仅注释说明未采纳                                                                               | 不自动设置代理                           |
 | 7 工具别名 | 仅注释说明未采纳                                                                               | 不绑定个人路径                           |
-| 8 终端艺术 | `def img` / `def art` / `def --wrapped banner`                                                 | 依赖 chafa / fastfetch / wezterm imgcat  |
+| 8 终端艺术 | `def img [--width]` / `def art` / `def --wrapped banner` / `def art-help`                    | chafa / fastfetch / wezterm imgcat       |
 | 9 视觉细节 | `table.header_on_separator`、`missing_value_symbol`、`PYTHONIOENCODING`                         | 表头分隔线 / UTF-8                        |
 
 ### 2.1 `env.nu`
@@ -158,5 +158,6 @@
 - [文件参考](file-reference.md)
 - [定制指南](customization.md)
 - [排错手册](troubleshooting.md)
+
 
 
